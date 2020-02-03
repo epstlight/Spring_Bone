@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war' //웹 아카이브 만드는 플러그인
+
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+version = '1.0'
+
+eclipse {
+  wtp {
+    facet {
+      facet name: 'jst.web', version: '3.1' // Servlet Spec Version 지정
+      facet name: 'jst.java', version: '1.8' // Java Version 지정, 1.8 ...
+    }
+  }
+}
+
+// 어느 서버에서 라이브러리를 가져올건가 
+repositories {
+  mavenCentral()
+  //메이븐 서버에서 가져온다 호환이 된다. 
+}
+
+dependencies {
+  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+  
+  compile 'org.springframework:spring-webmvc:5.2.3.RELEASE'
+  compile 'org.mybatis:mybatis-spring:2.0.3'
+  compile 'org.mybatis:mybatis:3.5.3'
+  compile 'mysql:mysql-connector-java:8.0.18'
+  compile 'org.springframework:spring-jdbc:5.2.3.RELEASE'
+  compile 'jstl:jstl:1.2'
+  compile 'org.reflections:reflections:0.9.12'
+  compile 'log4j:log4j:1.2.17'
+  
+  compile 'org.springframework:spring-context:5.2.3.RELEASE'
+  
+  testCompile 'junit:junit:4.13'
+}
